@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import parfumeRoutes from "./Routes/Parfume.routes";
+import authRoutes from "./Routes/User.routes";
+import campaignRoutes from "./Routes/Campaign.routes";
 import cors from "cors";
 
 dotenv.config({quiet: true});
@@ -15,6 +17,8 @@ app.get("/", (req, res)=>{
     res.send("Hello");
 })
 app.use("/parfumes", parfumeRoutes);
+app.use("/auth", authRoutes);
+app.use("/campaign", campaignRoutes);
 
 mongoose.connect(process.env.MongoDbUri as string).then(()=>{
     console.log("MongoDb Connected");

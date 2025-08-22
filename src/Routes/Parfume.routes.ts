@@ -2,6 +2,7 @@ import express from "express";
 import { addParfume, deleteParfume, editParfume, getAllParfume, getBySlugParfume } from "../controllers/Parfume.controller";
 import multer from "multer";
 import path from "path";
+import IsValidToken from "../Middleware/IsValidToken";
 
 const router = express.Router();
 
@@ -18,8 +19,8 @@ const upload = multer({ storage: storage });
 
 router.get("/", getAllParfume);
 router.get("/:slug", getBySlugParfume);
-router.post("/edit/:slug", upload.array("images", 10), editParfume);
-router.post("/add", upload.array("images", 10), addParfume);
-router.delete("/delete/:slug", deleteParfume);
+router.post("/edit/:slug", IsValidToken, upload.array("images", 10), editParfume);
+router.post("/add",  IsValidToken, upload.array("images", 10), addParfume);
+router.delete("/delete/:slug", IsValidToken, deleteParfume);
 
 export default router;

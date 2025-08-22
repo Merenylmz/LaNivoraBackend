@@ -27,7 +27,7 @@ const parfumeSchema = new mongoose.Schema({
     images: {type: Array<String>, nullable: true, default: []},
     star: {type: Boolean, default: false, nullable: true},
     slug: String,
-    campaignId: {type: mongoose.Schema.Types.ObjectId, ref: "Compaign", nullable: true}
+    campaignId: {type: mongoose.Schema.Types.ObjectId, ref: "Campaign", nullable: true}
 });
 
 const Parfume = mongoose.model<IParfume>("Parfume", parfumeSchema);
