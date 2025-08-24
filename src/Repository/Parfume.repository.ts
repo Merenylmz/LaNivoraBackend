@@ -23,8 +23,20 @@ export default class ParfumeRepository implements IParfumeInterface{
         const status = await this.model.findOneAndDelete({slug: slug}); 
         return status ? true : false;
     }
-    async editParfume(slug: String, data: Promise<IParfume>) : Promise<any>{
-        const editedParfume = await this.model.updateOne({ slug: slug }, { $set: { ...data } });
+    async editParfume(slug: string, data: Promise<IParfume>): Promise<any> {
+        const resolvedData = await data;
+
+        const updatePayload: Partial<IParfume> = { ...resolvedData };
+
+        if (!resolvedData.images || resolvedData.images.length === 0) {
+            delete updatePayload.images;
+        }
+
+        const editedParfume = await this.model.updateOne(
+            { slug: slug },
+            { $set: updatePayload }
+        );
+
         return editedParfume;
     }
 }

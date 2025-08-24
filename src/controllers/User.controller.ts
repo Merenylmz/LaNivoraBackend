@@ -21,7 +21,7 @@ const login = async(req: Request, res: Response) =>{
         user.lastLoginToken = token;
         await user.save()
 
-        res.send({token, user});        
+        res.send({token, user, status: true});        
     } catch (error) {
         console.log(error);
     }
@@ -43,7 +43,7 @@ const register = async(req: Request, res: Response) =>{
 
         await newUser.save();
 
-        res.send(newUser);
+        res.send({newUser, status: true});
     } catch (error) {
         console.log(error);
     }

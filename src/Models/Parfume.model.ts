@@ -9,7 +9,7 @@ export interface IParfume extends mongoose.Document {
     isActive: Boolean,
     quantity?: Number,
     fragranceNotes?: String,
-    images?: Array<String>,
+    images: Array<String>,
     star?: Boolean,
     slug: String,
     campaignId: any
