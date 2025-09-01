@@ -9,7 +9,9 @@ import cors from "cors";
 dotenv.config({quiet: true});
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["https://lanivora.net", "http://lanivora.net", "http://localhost:3000"]
+}));
 app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static("public"));
 
@@ -22,7 +24,7 @@ app.use("/campaign", campaignRoutes);
 
 mongoose.connect(process.env.MongoDbUri as string).then(()=>{
     console.log("MongoDb Connected");
-    app.listen(3002, ()=>{
+    app.listen((process.env.PORT || 3002), ()=>{
         console.log("Listening a PORT");
     });
 }).catch(()=>{
