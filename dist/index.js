@@ -14,7 +14,9 @@ dotenv_1.default.config({ quiet: true });
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: ["https://lanivora.net", "http://lanivora.net", "http://localhost:3000", "https://la-nivora-frontend.vercel.app"]
+    origin: ["https://lanivora.net", "http://lanivora.net", "http://localhost:3000", "https://la-nivora-frontend.vercel.app", 'https://www.lanivora.net'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/public", express_1.default.static("public"));
