@@ -10,7 +10,7 @@ dotenv.config({quiet: true});
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: ["https://lanivora.net", "http://lanivora.net", "http://localhost:3000"]
+    origin: ["https://lanivora.net", "http://lanivora.net", "http://localhost:3000", "https://la-nivora-frontend.vercel.app"]
 }));
 app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static("public"));
