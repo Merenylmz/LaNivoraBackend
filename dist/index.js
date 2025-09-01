@@ -4,10 +4,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const Parfume_routes_1 = __importDefault(require("./Routes/Parfume.routes"));
+const User_routes_1 = __importDefault(require("./Routes/User.routes"));
+const Campaign_routes_1 = __importDefault(require("./Routes/Campaign.routes"));
+const cors_1 = __importDefault(require("cors"));
+dotenv_1.default.config({ quiet: true });
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cors_1.default)());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use("/public", express_1.default.static("public"));
 app.get("/", (req, res) => {
     res.send("Hello");
 });
-app.listen(3000, () => {
-    console.log("Listening a PORT 3000");
+app.use("/parfumes", Parfume_routes_1.default);
+app.use("/auth", User_routes_1.default);
+app.use("/campaign", Campaign_routes_1.default);
+mongoose_1.default.connect(process.env.MongoDbUri).then(() => {
+    console.log("MongoDb Connected");
+    app.listen(3002, () => {
+        console.log("Listening a PORT");
+    });
+}).catch(() => {
+    console.log("MongoDb NOT connected");
 });
