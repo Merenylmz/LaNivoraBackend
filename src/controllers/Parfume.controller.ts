@@ -5,7 +5,7 @@ const parfumeRepository = new ParfumeRepository();
 
 const getAllParfume = async(req : Request, res: Response) =>{
     try {
-        const parfumes = await parfumeRepository.getAllParfume();
+        const parfumes = await parfumeRepository.getAllParfume(req.query.isadminpanel == "1" ? true : false);
         res.send(parfumes);
     } catch (error) {
         console.log(error);
@@ -13,7 +13,7 @@ const getAllParfume = async(req : Request, res: Response) =>{
 };
 const getBySlugParfume = async(req : Request, res: Response) =>{
     try {
-        const parfume = await parfumeRepository.getBySlugParfume(req.params.slug);
+        const parfume = await parfumeRepository.getBySlugParfume(req.params.slug, req.query.isadminpanel == "1" ? true : false);
         res.send(parfume);
     } catch (error) {
         console.log(error);

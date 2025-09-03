@@ -8,12 +8,23 @@ export default class ParfumeRepository implements IParfumeInterface{
         this.model = Parfume
     }
 
-    async getAllParfume(): Promise<Array<IParfume>> {
-        const parfumes = await this.model.find().populate("campaignId");
+    async getAllParfume(isAdminPanel: Boolean): Promise<Array<IParfume>> {
+        let parfumes;
+        if (isAdminPanel) {
+            parfumes = await this.model.find().populate("campaignId");
+            
+        } else{
+            parfumes = await this.model.find({isActive: true}).populate("campaignId");
+        }
         return parfumes;
     }
-    async getBySlugParfume(slug: String): Promise<IParfume> {
-        const parfume = await this.model.findOne({slug: slug}).populate("campaignId") as IParfume;
+    async getBySlugParfume(slug: String, isAdminPanel: Boolean): Promise<IParfume> {
+        let parfume;
+        if (isAdminPanel) {
+            parfume = await this.model.findOne({slug: slug}).populate("campaignId") as IParfume;
+        } else{
+            parfume = await this.model.findOne({slug: slug, isActive: true}).populate("campaignId") as IParfume;
+        }
         return parfume;
     }
     async addParfume(data: Promise<IParfume>): Promise<void> {
