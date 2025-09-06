@@ -40,7 +40,6 @@ const addParfume = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!req.files) {
             return res.send({ "msg": "Please Give Images", status: false });
         }
-        console.log(req.body);
         const files = req.files;
         const urls = files.map((file) => `${process.env.BASE_URL}/public/uploads/${file.filename}`);
         const data = Object.assign(Object.assign({}, req.body), { images: urls });
