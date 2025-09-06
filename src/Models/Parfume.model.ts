@@ -12,7 +12,7 @@ export interface IParfume extends mongoose.Document {
     images: Array<String>,
     star?: Boolean,
     slug: String,
-    campaignId: any
+    campaignId?: any
 }
 
 const parfumeSchema = new mongoose.Schema({
@@ -27,7 +27,7 @@ const parfumeSchema = new mongoose.Schema({
     images: {type: Array<String>, nullable: true, default: []},
     star: {type: Boolean, default: false, nullable: true},
     slug: String,
-    campaignId: {type: mongoose.Schema.Types.ObjectId, ref: "Campaign", nullable: true}
+    campaignId: {type: mongoose.Schema.Types.ObjectId, ref: "Campaign", nullable: true, default: null}
 });
 
 const Parfume = mongoose.model<IParfume>("Parfume", parfumeSchema);

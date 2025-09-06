@@ -16,7 +16,7 @@ const parfumeSchema = new mongoose_1.default.Schema({
     images: { type: (Array), nullable: true, default: [] },
     star: { type: Boolean, default: false, nullable: true },
     slug: String,
-    campaignId: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "Campaign", nullable: true }
+    campaignId: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "Campaign", nullable: true, default: null }
 });
 const Parfume = mongoose_1.default.model("Parfume", parfumeSchema);
 exports.default = Parfume;

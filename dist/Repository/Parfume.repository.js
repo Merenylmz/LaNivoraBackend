@@ -17,15 +17,27 @@ class ParfumeRepository {
     constructor() {
         this.model = Parfume_model_1.default;
     }
-    getAllParfume() {
+    getAllParfume(isAdminPanel) {
         return __awaiter(this, void 0, void 0, function* () {
-            const parfumes = yield this.model.find().populate("campaignId");
+            let parfumes;
+            if (isAdminPanel) {
+                parfumes = yield this.model.find().populate("campaignId");
+            }
+            else {
+                parfumes = yield this.model.find({ isActive: true }).populate("campaignId");
+            }
             return parfumes;
         });
     }
-    getBySlugParfume(slug) {
+    getBySlugParfume(slug, isAdminPanel) {
         return __awaiter(this, void 0, void 0, function* () {
-            const parfume = yield this.model.findOne({ slug: slug }).populate("campaignId");
+            let parfume;
+            if (isAdminPanel) {
+                parfume = (yield this.model.findOne({ slug: slug }).populate("campaignId"));
+            }
+            else {
+                parfume = (yield this.model.findOne({ slug: slug, isActive: true }).populate("campaignId"));
+            }
             return parfume;
         });
     }

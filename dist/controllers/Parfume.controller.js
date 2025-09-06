@@ -17,7 +17,7 @@ const Parfume_repository_1 = __importDefault(require("../Repository/Parfume.repo
 const parfumeRepository = new Parfume_repository_1.default();
 const getAllParfume = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const parfumes = yield parfumeRepository.getAllParfume();
+        const parfumes = yield parfumeRepository.getAllParfume(req.query.isadminpanel == "1" ? true : false);
         res.send(parfumes);
     }
     catch (error) {
@@ -27,7 +27,7 @@ const getAllParfume = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.getAllParfume = getAllParfume;
 const getBySlugParfume = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const parfume = yield parfumeRepository.getBySlugParfume(req.params.slug);
+        const parfume = yield parfumeRepository.getBySlugParfume(req.params.slug, req.query.isadminpanel == "1" ? true : false);
         res.send(parfume);
     }
     catch (error) {
